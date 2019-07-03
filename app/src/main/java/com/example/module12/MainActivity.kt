@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         MapsExample.setOnClickListener(View.OnClickListener {
-            var intent = Intent(this , FusedLocationExample::class.java)
+            var intent = Intent(this , MapsActivity::class.java)
             startActivity(intent)
         })
     }
