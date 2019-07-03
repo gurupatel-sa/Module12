@@ -9,9 +9,11 @@
         tools:context=".MainActivity">
 
 
+
+
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:text="Location Example"
-            android:id="@+id/FusedLocationDemo"
+            android:text="Maps Example"
+            android:id="@+id/MapsExample"
     />
 
 </LinearLayout>
