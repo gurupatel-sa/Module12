@@ -16,7 +16,7 @@ import java.util.*
 
 class FusedLocationExample : AppCompatActivity() ,LocationListener {
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-        Log.d(TAG ,"on statu")
+        Log.d(TAG ,"on status")
     }
 
     override fun onProviderEnabled(provider: String?) {
@@ -38,10 +38,8 @@ class FusedLocationExample : AppCompatActivity() ,LocationListener {
         var address:List<Address>
 
         address=geocoder.getFromLocation(lat ,long ,3)
-
         Log.d(TAG ,"Address" + address?.get(0)?.locality)
     }
-
 
     lateinit var fusedLocationProviderClient : FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
