@@ -31,6 +31,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
     private var marker : MarkerOptions?= null
     private var m :Marker? =null
 
+    private var m1:Marker ?=null
+
     var TAG : String = this.javaClass.getSimpleName()
     @SuppressLint("RestrictedApi", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,6 +123,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
 
             }
         })
+
+
 
     }
 
