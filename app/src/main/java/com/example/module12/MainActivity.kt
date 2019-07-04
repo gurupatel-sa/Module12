@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GeoFencingExample.setOnClickListener(View.OnClickListener {
+        GeoFencing.setOnClickListener(View.OnClickListener {
             var intent = Intent(this , GeoFencingExample::class.java)
             startActivity(intent)
         })
