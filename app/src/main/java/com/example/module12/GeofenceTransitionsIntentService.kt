@@ -9,7 +9,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil.getErrorString
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
 
-class GeofenceTransitionsIntentService : IntentService("GeoTrIntentService") {
+class GeofenceTransitionsIntentService : IntentService("") {
     var TAG : String = this.javaClass.getSimpleName()
     override fun onHandleIntent(intent: Intent?) {
         Log.d(TAG ,"onHandleIntent"  )

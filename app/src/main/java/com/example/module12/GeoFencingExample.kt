@@ -5,10 +5,12 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -42,6 +44,8 @@ class GeoFencingExample : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        var serviceIntent =Intent(this ,LocationJobIntentService::class.java)
+        LocationJobIntentService.enqueuwWork(this , serviceIntent)
 
         locationCallbacks = LocationsCallbacks()
         locationRequest = LocationRequest()
@@ -81,7 +85,7 @@ class GeoFencingExample : AppCompatActivity(), OnMapReadyCallback {
         geoFenceLimits = mMap?.addCircle(circleOptions)
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "RestrictedApi")
     override fun onMapReady(googleMap: GoogleMap?) {
         mMap = googleMap
         mMap?.isMyLocationEnabled = true
@@ -90,24 +94,32 @@ class GeoFencingExample : AppCompatActivity(), OnMapReadyCallback {
         geofencingClient = LocationServices.getGeofencingClient(this)
         m1 = mMap?.addMarker(MarkerOptions().title("Center").position(LatLng(67.0, -145.0)))
         drawGeoCircle()
+        
+        mMap?.setOnMarkerClickListener(object  :GoogleMap.OnMarkerClickListener{
+            override fun onMarkerClick(p0: Marker?): Boolean {
+                Toast.makeText(applicationContext, "Clicked ", Toast.LENGTH_SHORT).show();
+                return false
+                }
+        })
 
         var geofence = Geofence.Builder().setRequestId(requestId).setCircularRegion(67.0, -145.0, 1000f)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
             .setExpirationDuration(100000000)
-            .setLoiteringDelay(50000)
+            .setLoiteringDelay(1000)
             .build()
-
-
 
 //        var geofencingRequest = GeofencingRequest.Builder().addGeofence(geofence).build()
         var geofencingRequest = GeofencingRequest.Builder().addGeofences(arrayListOf(geofence)).build()
 
-
         var intent = Intent(this, GeofenceTransitionsIntentService::class.java)
-        var pendingIntent: PendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        var pendingIntent: PendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         geofencingClient?.addGeofences(geofencingRequest, pendingIntent)
 
+        //demo for background work
+        val intentForground = Intent(this, GetLocationServices::class.java)
+        intent.setAction("ACTION_START_FOREGROUND_SERVICE")
+        startService(intentForground)
 
     }
 
