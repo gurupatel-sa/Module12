@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MapsExample.setOnClickListener(View.OnClickListener {
-            var intent = Intent(this , MapsActivity::class.java)
+        GeoFencingExample.setOnClickListener(View.OnClickListener {
+            var intent = Intent(this , GeoFencingExample::class.java)
             startActivity(intent)
         })
     }
