@@ -21,7 +21,6 @@ import android.support.annotation.RequiresApi
 import android.util.Log
 import com.google.android.gms.location.*
 
-
 class GetLocationServices : Service(){
     private var mManager: NotificationManager? = null
     val ANDROID_CHANNEL_ID = "com.chikeandroid.tutsplustalerts.ANDROID"
@@ -86,10 +85,10 @@ class GetLocationServices : Service(){
             .setContentText("Example")
             .setSmallIcon(R.drawable.ic_dialog_dialer)
             .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
-            .setOngoing(true).build()
+            .build()
 
         startForeground(1001, notification)
-        return Service.START_STICKY
+        return START_STICKY
     }
 
     private val mLocationCallback= object : LocationCallback(){
